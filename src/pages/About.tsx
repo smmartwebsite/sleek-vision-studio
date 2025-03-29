@@ -11,6 +11,17 @@ import ValuesSection from '@/components/about/ValuesSection';
 const About = () => {
   useEffect(() => {
     document.title = 'About Us | Smmart Business Consulting';
+    
+    // Smooth scroll to section if hash is present in the URL
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+      const element = document.getElementById(hash);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
   }, []);
 
   return (
@@ -18,10 +29,18 @@ const About = () => {
       <Navbar />
       <main className="flex-grow">
         <AboutHero />
-        <MissionSection />
-        <ValuesSection />
-        <HistorySection />
-        <TeamSection />
+        <div id="mission">
+          <MissionSection />
+        </div>
+        <div id="values">
+          <ValuesSection />
+        </div>
+        <div id="history">
+          <HistorySection />
+        </div>
+        <div id="team">
+          <TeamSection />
+        </div>
       </main>
       <Footer />
     </div>
