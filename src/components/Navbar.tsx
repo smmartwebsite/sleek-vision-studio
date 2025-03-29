@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from '@/lib/utils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import ConsultationForm from './ConsultationForm';
 
 const navItems = [
   {
@@ -176,11 +177,7 @@ const Navbar = () => {
           
           <Dialog open={consultationOpen} onOpenChange={setConsultationOpen}>
             <DialogTrigger asChild>
-              <Button 
-                variant="accent" 
-                size="default" 
-                leftIcon={<span className="inline-block w-1 h-1 rounded-full bg-current" />}
-              >
+              <Button variant="accent" size="default">
                 Get a Consultation
               </Button>
             </DialogTrigger>
@@ -189,28 +186,25 @@ const Navbar = () => {
                 <DialogTitle>Request a Consultation</DialogTitle>
               </DialogHeader>
               <div className="py-4">
-                <p className="text-sm text-gray-600 mb-4">
-                  Please fill out this form and one of our consultants will get back to you within 24 hours.
-                </p>
-                <div className="flex justify-end mt-4">
-                  <Button variant="outline" className="mr-2" onClick={() => setConsultationOpen(false)}>
-                    Cancel
-                  </Button>
-                  <Button>Submit Request</Button>
-                </div>
+                <ConsultationForm 
+                  onSubmit={() => setConsultationOpen(false)}
+                  onCancel={() => setConsultationOpen(false)}
+                />
               </div>
             </DialogContent>
           </Dialog>
         </div>
 
         <div className="md:hidden">
-          <button
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="text-smmart-blue p-2"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          </Button>
         </div>
       </div>
 

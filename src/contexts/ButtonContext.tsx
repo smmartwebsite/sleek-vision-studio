@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-type ButtonSize = 'sm' | 'default' | 'lg';
+type ButtonSize = 'sm' | 'default' | 'lg' | 'icon';
 type ButtonVariant = 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link' | 'accent';
 
 interface ButtonContextType {

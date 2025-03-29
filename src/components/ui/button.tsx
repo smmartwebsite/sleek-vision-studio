@@ -60,12 +60,22 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   }, ref) => {
     // Get global context values
     const context = useButtonContext();
-    const Comp = asChild ? Slot : "button"
+    const Comp = asChild ? Slot : "button";
     
     // Use context values as fallbacks if props are not provided
     const resolvedVariant = variant || context.globalVariant;
     const resolvedSize = size || context.globalSize;
     const resolvedLoading = isLoading !== undefined ? isLoading : context.isLoading;
+
+    // Create button content
+    const buttonContent = (
+      <>
+        {resolvedLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+        {!resolvedLoading && leftIcon}
+        {children}
+        {!resolvedLoading && rightIcon}
+      </>
+    );
 
     return (
       <Comp
@@ -74,10 +84,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={props.disabled || resolvedLoading}
         {...props}
       >
-        {resolvedLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-        {!resolvedLoading && leftIcon}
-        {children}
-        {!resolvedLoading && rightIcon}
+        {buttonContent}
       </Comp>
     )
   }
