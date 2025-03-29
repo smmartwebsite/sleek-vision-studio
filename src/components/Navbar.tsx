@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from 'react';
-import * as React from 'react'; // Add this import for React reference
+import * as React from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'react-router-dom';
@@ -14,8 +13,8 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { cn } from '@/lib/utils';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
-// Main navigation structure with dropdown menus
 const navItems = [
   {
     title: 'Home',
@@ -60,7 +59,6 @@ const navItems = [
   },
 ];
 
-// Custom NavigationMenuLink component with styling
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
   React.ComponentPropsWithoutRef<"a">
@@ -90,6 +88,7 @@ ListItem.displayName = "ListItem";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [consultationOpen, setConsultationOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -107,12 +106,10 @@ const Navbar = () => {
     };
   }, []);
 
-  // Close mobile menu when navigating
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location]);
 
-  // Handle smooth scroll to sections on the same page
   const handleSectionNavigation = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     const isHashLink = href.includes('#');
     
@@ -120,7 +117,6 @@ const Navbar = () => {
       const [path, hash] = href.split('#');
       const currentPath = location.pathname;
       
-      // If we're already on the correct page, scroll to the section
       if (currentPath === path || (path === '' && hash)) {
         e.preventDefault();
         const element = document.getElementById(hash);
@@ -145,7 +141,6 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Desktop Navigation - Using NavigationMenu */}
         <div className="hidden md:flex items-center">
           <NavigationMenu className="mr-4">
             <NavigationMenuList>
@@ -178,10 +173,36 @@ const Navbar = () => {
               ))}
             </NavigationMenuList>
           </NavigationMenu>
-          <Button className="btn-primary">Get a Consultation</Button>
+          
+          <Dialog open={consultationOpen} onOpenChange={setConsultationOpen}>
+            <DialogTrigger asChild>
+              <Button 
+                variant="accent" 
+                size="default" 
+                leftIcon={<span className="inline-block w-1 h-1 rounded-full bg-current" />}
+              >
+                Get a Consultation
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Request a Consultation</DialogTitle>
+              </DialogHeader>
+              <div className="py-4">
+                <p className="text-sm text-gray-600 mb-4">
+                  Please fill out this form and one of our consultants will get back to you within 24 hours.
+                </p>
+                <div className="flex justify-end mt-4">
+                  <Button variant="outline" className="mr-2" onClick={() => setConsultationOpen(false)}>
+                    Cancel
+                  </Button>
+                  <Button>Submit Request</Button>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
 
-        {/* Mobile Navigation Trigger */}
         <div className="md:hidden">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -193,7 +214,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-white w-full shadow-lg animate-fade-in overflow-y-auto max-h-[80vh]">
           <div className="container-custom py-4 flex flex-col">
@@ -204,7 +224,6 @@ const Navbar = () => {
                     <div 
                       className="flex justify-between items-center py-2 text-smmart-blue font-medium cursor-pointer"
                       onClick={() => {
-                        // Toggle submenu visibility
                         const submenu = document.getElementById(`submenu-${item.title}`);
                         if (submenu) {
                           submenu.classList.toggle('hidden');
@@ -237,7 +256,15 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-            <Button className="btn-primary w-full mt-4" onClick={() => setIsMenuOpen(false)}>
+            <Button 
+              variant="accent" 
+              size="default" 
+              className="w-full mt-4" 
+              onClick={() => {
+                setIsMenuOpen(false);
+                setConsultationOpen(true);
+              }}
+            >
               Get a Consultation
             </Button>
           </div>
