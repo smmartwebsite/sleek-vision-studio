@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import * as React from 'react'; // Add this import for React reference
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'react-router-dom';
