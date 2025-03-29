@@ -10,7 +10,7 @@ const testimonials = [
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3',
     rating: 5,
     quote:
-      'Partnering with Smmart Business Consulting was a game-changer for our company. Their strategic insights and tailored solutions helped us navigate a challenging market transition and achieve 40% growth within a year. Highly recommended!',
+      "Partnering with Smmart Business Consulting was a game-changer for our company. Their strategic insights and tailored solutions helped us navigate a challenging market transition and achieve 40% growth within a year. Highly recommended!",
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const testimonials = [
     image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3',
     rating: 5,
     quote:
-      'As a startup founder, I needed guidance on scaling my business sustainably. The Smmart team provided exceptional support, from market analysis to operational strategy. Their expertise was invaluable to our success.',
+      "As a startup founder, I needed guidance on scaling my business sustainably. The Smmart team provided exceptional support, from market analysis to operational strategy. Their expertise was invaluable to our success.",
   },
   {
     id: 3,
@@ -28,7 +28,7 @@ const testimonials = [
     image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3',
     rating: 5,
     quote:
-      'Smmart delivered beyond our expectations. Their financial advisory services helped us optimize our cash flow and identify key investment opportunities. Their team's professionalism and attention to detail are truly exceptional.',
+      "Smmart delivered beyond our expectations. Their financial advisory services helped us optimize our cash flow and identify key investment opportunities. Their team's professionalism and attention to detail are truly exceptional.",
   },
   {
     id: 4,
@@ -37,7 +37,7 @@ const testimonials = [
     image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3',
     rating: 5,
     quote:
-      'In the complex healthcare sector, finding consultants who understand our unique challenges is difficult. Smmart not only understood our needs but provided actionable strategies that improved our service delivery and patient satisfaction.',
+      "In the complex healthcare sector, finding consultants who understand our unique challenges is difficult. Smmart not only understood our needs but provided actionable strategies that improved our service delivery and patient satisfaction.",
   },
 ];
 
