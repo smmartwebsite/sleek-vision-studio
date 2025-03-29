@@ -1,11 +1,8 @@
-
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
-import { Loader2 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { useButtonContext } from "@/contexts/ButtonContext"
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
@@ -21,7 +18,6 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        accent: "bg-smmart-gold text-smmart-blue hover:bg-opacity-90",
       },
       size: {
         default: "h-10 px-4 py-2",
@@ -40,52 +36,18 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
-  isLoading?: boolean;
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
+  asChild?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ 
-    className, 
-    variant, 
-    size, 
-    asChild = false, 
-    isLoading,
-    leftIcon,
-    rightIcon,
-    children,
-    ...props 
-  }, ref) => {
-    // Get global context values
-    const context = useButtonContext();
-    const Comp = asChild ? Slot : "button";
-    
-    // Use context values as fallbacks if props are not provided
-    const resolvedVariant = variant || context.globalVariant;
-    const resolvedSize = size || context.globalSize;
-    const resolvedLoading = isLoading !== undefined ? isLoading : context.isLoading;
-
-    // Create button content
-    const buttonContent = (
-      <>
-        {resolvedLoading && <Loader2 className="h-4 w-4 animate-spin" />}
-        {!resolvedLoading && leftIcon}
-        {children}
-        {!resolvedLoading && rightIcon}
-      </>
-    );
-
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button"
     return (
       <Comp
-        className={cn(buttonVariants({ variant: resolvedVariant, size: resolvedSize, className }))}
+        className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
-        disabled={props.disabled || resolvedLoading}
         {...props}
-      >
-        {buttonContent}
-      </Comp>
+      />
     )
   }
 )
