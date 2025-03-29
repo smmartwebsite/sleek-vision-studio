@@ -21,7 +21,7 @@ const values = [
   },
   {
     title: 'Client Focus',
-    description: 'We put our clients' needs first, developing customized solutions that address their unique situations.',
+    description: "We put our clients' needs first, developing customized solutions that address their unique situations.",
     icon: Heart,
   },
   {
